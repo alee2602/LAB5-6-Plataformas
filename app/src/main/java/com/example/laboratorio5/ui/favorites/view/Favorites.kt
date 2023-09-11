@@ -1,4 +1,4 @@
-package com.example.laboratorio5
+package com.example.laboratorio5.ui.favorites.view
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
@@ -33,6 +33,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.laboratorio5.R
 
 data class FavoriteConcerts(val title: String, val location: String )
 

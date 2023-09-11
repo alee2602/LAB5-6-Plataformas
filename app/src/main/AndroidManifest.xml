@@ -15,16 +15,16 @@
         android:theme="@style/Theme.Laboratorio5"
         tools:targetApi="31">
         <activity
-            android:name=".Favorites"
+            android:name=".ui.favorites.view.Favorites"
             android:exported="false" />
         <activity
-            android:name=".Profile"
+            android:name=".ui.profile.view.Profile"
             android:exported="true" />
         <activity
-            android:name=".Details"
+            android:name=".ui.detail.view.Details"
             android:exported="true" />
         <activity
-            android:name=".ConcertInfoActivity"
+            android:name=".ui.concerts.view.ConcertInfoActivity"
             android:exported="true" />
         <activity
             android:name=".ListofPlaces"

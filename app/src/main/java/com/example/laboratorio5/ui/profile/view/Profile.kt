@@ -4,7 +4,7 @@
 //Mónica Salvatierra
 //Carné: 22249
 
-package com.example.laboratorio5
+package com.example.laboratorio5.ui.profile.view
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -43,6 +43,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.laboratorio5.R
 
 data class UserProfile(val name: String) //Data class que contiene el nombre del usuario
 

@@ -4,7 +4,7 @@
 //Mónica Salvatierra
 //Carné: 22249
 
-package com.example.laboratorio5
+package com.example.laboratorio5.ui.detail.view
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -40,6 +40,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.laboratorio5.R
 
 data class ConcertDetail(val title: String, val date: String, val time: String, val description: String)  //Data class que contiene la información de los conciertos individuales
 
@@ -102,7 +103,7 @@ fun DetailsMainApp() {
                 .padding(16.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {  //Incluye la hora y la fecha del concierto con sus respectivos icons
-            DetailItem(icon = painterResource(id =R.drawable.calendar ), text = "Fecha: ${concert.date}")
+            DetailItem(icon = painterResource(id = R.drawable.calendar ), text = "Fecha: ${concert.date}")
             DetailItem(icon = painterResource(id = R.drawable.access_time), text = "Hora: ${concert.time}")
         }
 

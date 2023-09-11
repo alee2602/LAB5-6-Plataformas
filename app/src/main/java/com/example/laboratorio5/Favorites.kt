@@ -1,9 +1,3 @@
-//Universidad del Valle de Guatemala
-//Programación de Plataformas Móviles
-//Sección 20
-//Mónica Salvatierra
-//Carné: 22249
-
 package com.example.laboratorio5
 
 import android.os.Bundle
@@ -40,21 +34,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-data class Place(val title: String, val location: String) //Data class que contiene la información de cada concierto y su respectivo lugar
+data class FavoriteConcerts(val title: String, val location: String )
 
-class ListofPlaces : AppCompatActivity() {
+class Favorites : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_favorites)
         setContent{
             MaterialTheme{
-                PlacesMainApp()
+                FavoritesMainApp()
             }
         }
     }
 }
 
 @Composable
-fun PlacesMainApp() {
+fun FavoritesMainApp(){ //**SUBJECT TO CHANGE** //
     Column(  //Contiene la estructura de la pantalla
         modifier = Modifier
             .fillMaxSize()
@@ -63,33 +58,34 @@ fun PlacesMainApp() {
     )
     {
         Text( //Título
-        text = "Upcoming Shows",
-        fontSize = 34.sp,
-        fontWeight = FontWeight.Bold,
-        modifier = Modifier.padding(16.dp)
-            .align(Alignment.CenterHorizontally)
+            text = "Upcoming Shows",
+            fontSize = 34.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.CenterHorizontally)
         )
         LazyColumn( //Permite que se puedan visualizar todos los lugares de los conciertos mediante un scroll vertical
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp)
         ){
             item{
-                PlaceCard( //Cards individuales que representan cada location
-                    Place(title = "Taylor Swift  LA", location = "So-Fi Stadium")
+                FavoritesCard( //Cards individuales que representan cada location **FALTA AGREGAR MÁS**
+                    FavoriteConcerts(title = "Taylor Swift  LA", location = "So-Fi Stadium")
                 )
                 Spacer(modifier = Modifier.height(16.dp))
 
-                PlaceCard(
-                    Place(title = "Big Time Rush  LA", location = "Kia Forum")
+                FavoritesCard(
+                    FavoriteConcerts(title = "Big Time Rush  LA", location = "Kia Forum")
                 )
                 Spacer(modifier = Modifier.height(16.dp))
 
-                PlaceCard(
-                    Place(title = "Beyoncé  London", location = "Wembley Stadium")
+                FavoritesCard(
+                    FavoriteConcerts(title = "Beyoncé  London", location = "Wembley Stadium")
                 )
                 Spacer(modifier = Modifier.height(16.dp))
 
-                PlaceCard(
-                    Place(title = "Jonas Brothers  NY", location = "Madison Square Garden")
+                FavoritesCard(
+                    FavoriteConcerts(title = "Jonas Brothers  NY", location = "Madison Square Garden")
                 )
 
             }
@@ -98,7 +94,7 @@ fun PlacesMainApp() {
 }
 
 @Composable
-fun PlaceCard(place: Place) { //Cards para cada ubicación
+fun FavoritesCard(favs: FavoriteConcerts) { //Cards para cada ubicación
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -113,8 +109,8 @@ fun PlaceCard(place: Place) { //Cards para cada ubicación
             modifier = Modifier
                 .padding(16.dp)
         ) {
-            AvatarIcon( //Icono de perfil con letra
-                letter = place.title.first().toString(), //La letra será el primer carácter del nombre del artista
+            AIcon( //Icono de perfil con letra
+                letter = favs.title.first().toString(), //La letra será el primer carácter del nombre del artista
                 color = Color(0xFF9EA9ED)
 
             )
@@ -123,8 +119,8 @@ fun PlaceCard(place: Place) { //Cards para cada ubicación
 
             // Detalles del lugar
             Column {
-                Text(text = place.title, fontSize = 18.sp, color=Color.Black)
-                Text(text = place.location, fontSize = 14.sp, color = Color.Gray)
+                Text(text = favs.title, fontSize = 18.sp, color= Color.Black)
+                Text(text = favs.location, fontSize = 14.sp, color = Color.Gray)
             }
 
             Spacer(modifier = Modifier.weight(1f))
@@ -140,7 +136,7 @@ fun PlaceCard(place: Place) { //Cards para cada ubicación
 }
 
 @Composable
-fun AvatarIcon(letter: String, color: Color) { //Función que incluye la estructura del ícon para cada lugar
+fun AIcon(letter: String, color: Color) { //Función que incluye la estructura del ícon para cada lugar
     Box(
         modifier = Modifier
             .size(48.dp)

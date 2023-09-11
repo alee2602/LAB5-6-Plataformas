@@ -18,6 +18,7 @@ class MainActivity : ComponentActivity() {
             //PlacesMainApp()
             //DetailsMainApp()
             //ProfileMainApp()
+            //FavoritesMainApp()
         }
     }
 }

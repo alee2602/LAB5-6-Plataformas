@@ -17,7 +17,8 @@ class MainActivity : ComponentActivity() {
             //ConcertMainApp()
             //PlacesMainApp()
             //DetailsMainApp()
-            ProfileMainApp()
+            //ProfileMainApp()
+            //FavoritesMainApp()
         }
     }
 }

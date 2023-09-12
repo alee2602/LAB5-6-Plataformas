@@ -31,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.laboratorio5.R
@@ -155,4 +156,10 @@ fun AIcon(letter: String, color: Color) { //Función que incluye la estructura d
             modifier = Modifier.align(Alignment.Center)
         )
     }
+}
+
+@Composable
+@Preview
+fun FavoritesMainAppPreview(){
+    FavoritesMainApp()
 }

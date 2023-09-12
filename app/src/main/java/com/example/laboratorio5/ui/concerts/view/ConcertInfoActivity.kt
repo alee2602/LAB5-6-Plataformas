@@ -1,8 +1,3 @@
-//Universidad del Valle de Guatemala
-//Programación de Plataformas Móviles
-//Sección 20
-//Mónica Salvatierra
-//Carné: 22249
 
 package com.example.laboratorio5.ui.concerts.view
 
@@ -25,16 +20,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.example.laboratorio5.R
 
-data class Concert(val imageId: Int, val title: String, val supportingText: String) //Data class para las cards
+data class Concert( val imageId: Int, val title: String, val supportingText: String) //Data class para las cards
 
 class ConcertInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
        setContent{
            MaterialTheme{
                ConcertMainApp()
@@ -46,7 +43,7 @@ class ConcertInfoActivity : AppCompatActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ConcertMainApp() {
-    Column(                      //Contiene todos los elementos que componen a la pantalla
+    Column(      //Contiene todos los elementos que componen a la pantalla
         modifier = Modifier
             .padding(16.dp)
             .fillMaxSize()
@@ -62,7 +59,7 @@ fun ConcertMainApp() {
             }
         )
 
-        LazyColumn(     //Permite realizar scroll vertical para ver todos los conciertos
+        LazyColumn(  //Permite realizar scroll vertical para ver todos los conciertos
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp)
         ) {
             item{
@@ -180,4 +177,10 @@ fun ConcertCard(concert: Concert) {  //Cards para cada uno de los conciertos
             Text(text = concert.supportingText, fontSize = 14.sp, textAlign = TextAlign.Center)
         }
     }
+}
+
+@Composable
+@Preview
+fun ConcertMainAppPreview(){
+    ConcertMainApp()
 }

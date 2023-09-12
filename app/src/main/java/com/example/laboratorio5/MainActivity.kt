@@ -1,14 +1,10 @@
-//Universidad del Valle de Guatemala
-//Programación de Plataformas Móviles
-//Sección 20
-//Mónica Salvatierra
-//Carné: 22249
 
 package com.example.laboratorio5
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.example.laboratorio5.navegacion.model.MainScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,6 +15,7 @@ class MainActivity : ComponentActivity() {
             //DetailsMainApp()
             //ProfileMainApp()
             //FavoritesMainApp()
+            MainScreen()
         }
     }
 }

@@ -1,8 +1,3 @@
-//Universidad del Valle de Guatemala
-//Programación de Plataformas Móviles
-//Sección 20
-//Mónica Salvatierra
-//Carné: 22249
 
 package com.example.laboratorio5.ui.detail.view
 
@@ -38,6 +33,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.laboratorio5.R
@@ -165,4 +161,10 @@ fun DetailItem(icon: Painter, text: String) { //Contiene la estructura del detal
         Spacer(modifier = Modifier.width(8.dp))
         Text(text = text)
     }
+}
+
+@Composable
+@Preview
+fun DetailsMainAppPreview(){
+    DetailsMainApp()
 }

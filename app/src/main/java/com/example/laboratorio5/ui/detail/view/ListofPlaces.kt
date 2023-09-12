@@ -1,10 +1,5 @@
-//Universidad del Valle de Guatemala
-//Programación de Plataformas Móviles
-//Sección 20
-//Mónica Salvatierra
-//Carné: 22249
 
-package com.example.laboratorio5
+package com.example.laboratorio5.ui.detail.view
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
@@ -37,8 +32,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.laboratorio5.R
 
 data class Place(val title: String, val location: String) //Data class que contiene la información de cada concierto y su respectivo lugar
 
@@ -158,4 +155,10 @@ fun AvatarIcon(letter: String, color: Color) { //Función que incluye la estruct
             modifier = Modifier.align(Alignment.Center)
         )
     }
+}
+
+@Composable
+@Preview
+fun PlacesMainAppPreview(){
+    PlacesMainApp()
 }

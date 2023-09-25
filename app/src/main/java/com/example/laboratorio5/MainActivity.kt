@@ -1,4 +1,8 @@
-
+//Universidad del Valle de Guatemala
+//Programación de Plataformas Móviles
+//Sección 20
+//Mónica Salvatierra
+//Carné: 22249
 package com.example.laboratorio5
 
 import android.os.Bundle

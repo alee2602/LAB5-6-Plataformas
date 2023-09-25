@@ -1,12 +1,11 @@
 package com.example.laboratorio5.ui.favorites.view
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -24,6 +24,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -31,19 +32,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.laboratorio5.R
 
-data class FavoriteConcerts(val title: String, val location: String )
+data class FavoriteConcerts(val title: String, val location: String)
 
-class Favorites : AppCompatActivity() {
+class Favorites : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_favorites)
-        setContent{
-            MaterialTheme{
+        setContent {
+            MaterialTheme {
                 FavoritesMainApp()
             }
         }
@@ -51,85 +50,74 @@ class Favorites : AppCompatActivity() {
 }
 
 @Composable
-fun FavoritesMainApp(){ //**SUBJECT TO CHANGE** //
-    Column(  //Contiene la estructura de la pantalla
+fun FavoritesMainApp() {
+    val favoriteConcerts = remember {
+        listOf(
+            FavoriteConcerts(title = "Taylor Swift  LA", location = "So-Fi Stadium"),
+            FavoriteConcerts(title = "Big Time Rush  LA", location = "Kia Forum"),
+            FavoriteConcerts(title = "Beyoncé  London", location = "Wembley Stadium"),
+            FavoriteConcerts(title = "Jonas Brothers  NY", location = "Madison Square Garden")
+        )
+    }
+
+    Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color(android.graphics.Color.parseColor("#F8F4FF")))
-            .padding(16.dp)
-    )
-    {
-        Text( //Título
-            text = "Upcoming Shows",
+            .background(color = Color(0xFFF8F4FF))
+    ) {
+        Text(
+            text = "Favorites",
             fontSize = 34.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier
                 .padding(16.dp)
                 .align(Alignment.CenterHorizontally)
         )
-        LazyColumn( //Permite que se puedan visualizar todos los lugares de los conciertos mediante un scroll vertical
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp)
-        ){
-            item{
-                FavoritesCard( //Cards individuales que representan cada location **FALTA AGREGAR MÁS**
-                    FavoriteConcerts(title = "Taylor Swift  LA", location = "So-Fi Stadium")
-                )
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            items(favoriteConcerts) { concert ->
+                FavoritesCard(concert)
                 Spacer(modifier = Modifier.height(16.dp))
-
-                FavoritesCard(
-                    FavoriteConcerts(title = "Big Time Rush  LA", location = "Kia Forum")
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-
-                FavoritesCard(
-                    FavoriteConcerts(title = "Beyoncé  London", location = "Wembley Stadium")
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-
-                FavoritesCard(
-                    FavoriteConcerts(title = "Jonas Brothers  NY", location = "Madison Square Garden")
-                )
-
             }
         }
     }
 }
 
 @Composable
-fun FavoritesCard(favs: FavoriteConcerts) { //Cards para cada ubicación
+fun FavoritesCard(favs: FavoriteConcerts) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(16.dp)),
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFE7DEFF),
+            containerColor = Color(0xFFE7DEFF)
         ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .padding(16.dp)
         ) {
-            AIcon( //Icono de perfil con letra
-                letter = favs.title.first().toString(), //La letra será el primer carácter del nombre del artista
-                color = Color(0xFF9EA9ED)
-
+            AIcon(
+                letter = favs.title.first().toString(),
+                color = Color(4282391648)
             )
 
             Spacer(modifier = Modifier.width(16.dp))
 
-            // Detalles del lugar
             Column {
-                Text(text = favs.title, fontSize = 18.sp, color= Color.Black)
+                Text(text = favs.title, fontSize = 18.sp, color = Color.Black)
                 Text(text = favs.location, fontSize = 14.sp, color = Color.Gray)
             }
 
             Spacer(modifier = Modifier.weight(1f))
 
-            // Ícono de location
             Icon(
-                painter = painterResource(id = R.drawable.ic_location),
+                painter = painterResource(id = R.drawable.favorite),
                 contentDescription = null,
                 modifier = Modifier.size(30.dp)
             )
@@ -138,7 +126,7 @@ fun FavoritesCard(favs: FavoriteConcerts) { //Cards para cada ubicación
 }
 
 @Composable
-fun AIcon(letter: String, color: Color) { //Función que incluye la estructura del ícon para cada lugar
+fun AIcon(letter: String, color: Color) {
     Box(
         modifier = Modifier
             .size(48.dp)
@@ -156,10 +144,4 @@ fun AIcon(letter: String, color: Color) { //Función que incluye la estructura d
             modifier = Modifier.align(Alignment.Center)
         )
     }
-}
-
-@Composable
-@Preview
-fun FavoritesMainAppPreview(){
-    FavoritesMainApp()
 }

@@ -16,7 +16,7 @@ fun BottomNavGraph(navController: NavHostController){
         startDestination = BottomBarScreen.Events.route
     ){
         composable(route=BottomBarScreen.Events.route){
-            ConcertMainApp()
+            ConcertMainApp(navController)
         }
         composable(route=BottomBarScreen.Places.route){
             PlacesMainApp()

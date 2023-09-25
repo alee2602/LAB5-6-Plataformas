@@ -1,11 +1,14 @@
 
 package com.example.laboratorio5.ui.concerts.view
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -18,13 +21,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.laboratorio5.R
+import com.example.laboratorio5.ui.detail.view.Details
+import com.example.laboratorio5.ui.detail.view.DetailsMainApp
 
 data class Concert( val imageId: Int, val title: String, val supportingText: String) //Data class para las cards
 
@@ -32,17 +42,33 @@ class ConcertInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-       setContent{
-           MaterialTheme{
-               ConcertMainApp()
-           }
-       }
+        setContent {
+            ConcertInfoContent()
+        }
+    }
+
+    @Composable
+    fun ConcertInfoContent() {
+        val navController = rememberNavController() //Navegación para ir de una card a un detalle
+
+        MaterialTheme {
+            NavHost(navController, startDestination = "concertMainApp") {
+                composable("concertMainApp") {
+                    ConcertMainApp(navController)
+                }
+                composable("concertDetail/{concertId}") { backStackEntry ->
+                    val concertId = backStackEntry.arguments?.getString("concertId")
+                    DetailsMainApp(concertId)
+                }
+            }
+        }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ConcertMainApp() {
+fun ConcertMainApp(navController: NavController) {
+    val context = LocalContext.current
     Column(      //Contiene todos los elementos que componen a la pantalla
         modifier = Modifier
             .padding(16.dp)
@@ -76,8 +102,8 @@ fun ConcertMainApp() {
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    ConcertCard(concert = Concert(imageId = R.drawable.taylor_swift, title = "Taylor Swift", supportingText = "The Eras Tour"))
-                    ConcertCard(concert = Concert(imageId = R.drawable.bigtimerush, title = "Big Time Rush", supportingText = "Can´t Get Enough Tour"))
+                    ConcertCard(concert = Concert(imageId = R.drawable.taylor_swift, title = "Taylor Swift", supportingText = "The Eras Tour"), context= context)
+                    ConcertCard(concert = Concert(imageId = R.drawable.bigtimerush, title = "Big Time Rush", supportingText = "Can´t Get Enough Tour"), context= context)
                 }
             }
 
@@ -86,8 +112,8 @@ fun ConcertMainApp() {
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    ConcertCard(concert = Concert(imageId = R.drawable.beyonce, title = "Beyoncé", supportingText = "Reinassance Tour"))
-                    ConcertCard(concert = Concert(imageId = R.drawable.jonas_brothers, title = "Jonas Brothers", supportingText = "Five Albums. One Night. The Tour"))
+                    ConcertCard(concert = Concert(imageId = R.drawable.beyonce, title = "Beyoncé", supportingText = "Reinassance Tour"), context= context)
+                    ConcertCard(concert = Concert(imageId = R.drawable.jonas_brothers, title = "Jonas Brothers", supportingText = "Five Albums. One Night. The Tour"), context= context)
                 }
             }
             item {
@@ -97,7 +123,7 @@ fun ConcertMainApp() {
             item {
                 Text(
                     text = "All Concerts",  //Incluye todos los conciertos
-                    fontSize = 16.sp,
+                    fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black,
                     modifier = Modifier.padding(16.dp)
@@ -108,8 +134,8 @@ fun ConcertMainApp() {
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    ConcertCard(concert = Concert(imageId = R.drawable.beyonce, title = "Beyoncé", supportingText = "Reinassance Tour"))
-                    ConcertCard(concert = Concert(imageId = R.drawable.bigtimerush, title = "Big Time Rush", supportingText = "Can´t Get Enough Tour"))
+                    ConcertCard(concert = Concert(imageId = R.drawable.beyonce, title = "Beyoncé", supportingText = "Reinassance Tour"), context= context)
+                    ConcertCard(concert = Concert(imageId = R.drawable.bigtimerush, title = "Big Time Rush", supportingText = "Can´t Get Enough Tour"), context= context)
                 }
             }
 
@@ -118,8 +144,8 @@ fun ConcertMainApp() {
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    ConcertCard(concert = Concert(imageId = R.drawable.coldplay, title = "Coldplay", supportingText = "Music of The Spheres World Tour"))
-                    ConcertCard(concert = Concert(imageId = R.drawable.jonas_brothers, title = "Jonas Brothers", supportingText = "Five Albums. One Night. The Tour"))
+                    ConcertCard(concert = Concert(imageId = R.drawable.coldplay, title = "Coldplay", supportingText = "Music of The Spheres World Tour"), context= context)
+                    ConcertCard(concert = Concert(imageId = R.drawable.jonas_brothers, title = "Jonas Brothers", supportingText = "Five Albums. One Night. The Tour"),context= context)
                 }
             }
             item {
@@ -127,8 +153,9 @@ fun ConcertMainApp() {
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    ConcertCard(concert = Concert(imageId = R.drawable.taylor_swift, title = "Taylor Swift", supportingText = "The Eras Tour"))
-                    ConcertCard(concert = Concert(imageId= R.drawable.the_weekend, title = "The Weekend", supportingText = "After Hours Til Dawn Stadium Tour"))
+                    ConcertCard(concert = Concert(imageId = R.drawable.taylor_swift, title = "Taylor Swift", supportingText = "The Eras Tour"),  context= context)
+                    ConcertCard(concert = Concert(imageId= R.drawable.wosito, title = "WOS", supportingText = "Oscuro Éxtasis Tour"), context= context)
+
                 }
             }
 
@@ -139,13 +166,18 @@ fun ConcertMainApp() {
     }
 }
 @Composable
-fun ConcertCard(concert: Concert) {  //Cards para cada uno de los conciertos
+fun ConcertCard(concert: Concert, context: Context) {  //Cards para cada uno de los conciertos
     Card(
         modifier = Modifier
             .width(150.dp)
             .height(220.dp)
             .padding(8.dp)
-            .clip(RoundedCornerShape(20.dp)),
+            .clip(RoundedCornerShape(20.dp))
+            .clickable {
+                val intent= Intent(context, Details::class.java)
+                intent.putExtra("concertId", concert.title)
+                context.startActivity(intent)
+            },
         colors = CardDefaults.cardColors(
             containerColor = Color(0xFFFFF0F5),
         ),
@@ -182,5 +214,6 @@ fun ConcertCard(concert: Concert) {  //Cards para cada uno de los conciertos
 @Composable
 @Preview
 fun ConcertMainAppPreview(){
-    ConcertMainApp()
+    val navController = rememberNavController()
+    ConcertMainApp(navController)
 }

@@ -64,7 +64,7 @@ fun ProfileMainApp() {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 32.dp)
-                .background(Color(android.graphics.Color.parseColor("#A9629F")))
+                .background(Color(android.graphics.Color.parseColor("#974990")))
                 .align(Alignment.CenterHorizontally),
             contentAlignment = Alignment.Center
         ) {
